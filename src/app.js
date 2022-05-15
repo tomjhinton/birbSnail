@@ -416,12 +416,24 @@ const createPlayer = (width, height, depth, position) =>{
 
         world.addContactMaterial(worldContactMaterial)
         // world.defaultContactMaterial = worldContactMaterial
-
-
-// const cannonDebugger = new CannonDebugger(scene, world, {
-//   // options...
-// })
+let titular = document.getElementById('titular')
+let cannonMesh = false
+const cannonDebugger = new CannonDebugger(scene, world, {
+  onInit(body, mesh) {
+    mesh.visible = false
+           // Toggle visibiliy on "d" press
+           titular.addEventListener('click', function (e) {
+             mesh.visible = !mesh.visible
+             console.log(cannonMesh)
+           });
+         },
+})
 // body.allowSleep = false
+
+
+
+
+
 
 const clock = new THREE.Clock()
 let oldElapsedTime = 0
@@ -454,7 +466,10 @@ const tick = () =>{
   snail.quaternion.copy(chassisBody.quaternion)
 }
 
-  // cannonDebugger.update()
+  // if(cannonMesh === true){
+   cannonDebugger.update()
+ // }
+
 
   slimeMaterial.uniforms.uTime.value = elapsedTime
 
